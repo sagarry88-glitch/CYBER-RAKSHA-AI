@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SentinelGrid — Public AI Cyber Fraud, Spam &amp; Bug Defense Portal</title>
+  <meta name="description" content="Free public AI-powered cyber fraud detection, spam message analyzer, software bug &amp; vulnerability scanner, and community threat intelligence portal." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#overview" class="brand" data-nav="overview">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>SentinelGrid</strong>
+          <small>Public Cyber Defense</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <button class="nav-btn active" data-tab="overview">Overview</button>
+        <button class="nav-btn" data-tab="spam">Spam &amp; Scam Detector</button>
+        <button class="nav-btn" data-tab="bugs">Bug &amp; Link Scanner</button>
+        <button class="nav-btn" data-tab="feed">Public Threat Feed</button>
+        <button class="nav-btn" data-tab="prevent">Prevention Hub</button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button id="aiConfigBtn" class="btn btn-ghost btn-sm" title="Configure optional Live AI Copilot">
+          <span class="status-dot online"></span>
+          <span id="aiModeLabel">Local AI Active</span>
+        </button>
+        <button class="btn btn-primary btn-sm" data-jump="spam">Quick Scan</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <!-- TAB 1: OVERVIEW -->
+    <section id="tab-overview" class="tab-panel active">
+      <div class="hero card">
+        <div class="hero-copy">
+          <div class="pill-badge">
+            <span class="pulse-dot"></span>
+            Public Cyber Fraud Detection &amp; Prevention Platform
+          </div>
+          <h1>Stop Spam, Scams &amp; Security Bugs Before They Strike.</h1>
+          <p class="hero-sub">
+            Paste suspicious messages from strangers, emails, or DMs to detect phishing and social engineering—or scan shared code snippets and links for hidden software bugs, backdoors, and malicious payloads.
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-primary" data-jump="spam">Analyze Message / Spam</button>
+            <button class="btn btn-secondary" data-jump="bugs">Scan Code Bugs &amp; Links</button>
+            <button class="btn btn-ghost" data-jump="prevent">Emergency Playbook</button>
+          </div>
+        </div>
+
+        <div class="hero-telemetry">
+          <div class="telemetry-card">
+            <div class="telemetry-header">
+              <span>Live Shield Telemetry</span>
+              <span class="badge badge-safe">Protected</span>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-box">
+                <span class="stat-label">Local Scans Run</span>
+                <strong class="stat-value" id="statTotalScans">0</strong>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Threats Caught</span>
+                <strong class="stat-value text-danger" id="statThreatsCaught">0</strong>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Bugs Detected</span>
+                <strong class="stat-value text-warn" id="statBugsFound">0</strong>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Community Reports</span>
+                <strong class="stat-value text-cyan" id="statCommunityReports">0</strong>
+              </div>
+            </div>
+            <div class="privacy-note">
+              <strong>Zero-Trust Privacy:</strong> All scans run locally in your browser by default. Personal phone numbers, emails, and secrets are automatically redacted before optional community reporting.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Universal Quick Triage -->
+      <section class="card quick-triage">
+        <div class="section-head">
+          <div>
+            <h2>Universal AI Quick Triage</h2>
+            <p class="muted">Not sure what you received? Paste any message, URL, or code snippet below and SentinelGrid routes it to the right detection engine.</p>
+          </div>
+          <div class="quick-presets">
+            <button class="chip" data-quick-preset="sms">Test: Bank SMS Scam</button>
+            <button class="chip" data-quick-preset="url">Test: Lookalike Link</button>
+            <button class="chip" data-quick-preset="code">Test: Buggy Code Snippet</button>
+          </div>
+        </div>
+        <div class="quick-input-row">
+          <textarea id="quickInput" rows="3" placeholder="Paste a suspicious WhatsApp/SMS message, phishing link (https://...), or untrusted script/code snippet here..."></textarea>
+          <button id="quickAnalyzeBtn" class="btn btn-primary">Auto-Detect &amp; Scan</button>
+        </div>
+      </section>
+
+      <!-- Core Capabilities -->
+      <div class="feature-grid">
+        <article class="card feature-card">
+          <div class="feature-icon icon-cyan">01</div>
+          <h3>AI Spam &amp; Scam Message Shield</h3>
+          <p>Detects psychological urgency, OTP/KYC harvesting, advance-fee fraud, brand impersonation, and obfuscated Unicode tricks in messages from unknown senders.</p>
+          <button class="link-btn" data-jump="spam">Open Message Detector &rarr;</button>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-icon icon-amber">02</div>
+          <h3>Bug, Vulnerability &amp; Link Scanner</h3>
+          <p>Finds SQLi, XSS, command injection, hardcoded API keys, obfuscated malware, and logic bugs in code—plus dissects deceptive URLs and punycode traps.</p>
+          <button class="link-btn" data-jump="bugs">Open Bug &amp; Link Scanner &rarr;</button>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-icon icon-emerald">03</div>
+          <h3>Public Threat Feed &amp; Prevention</h3>
+          <p>Browse crowdsourced scam reports with auto-redacted PII, practice spotting real vs. fake messages in our quiz, and follow emergency recovery checklists.</p>
+          <button class="link-btn" data-jump="feed">View Threat Feed &rarr;</button>
+        </article>
+      </div>
+
+      <!-- Recent Local Scan History -->
+      <section class="card">
+        <div class="section-head">
+          <div>
+            <h2>Recent Scan Log</h2>
+            <p class="muted">Your latest local detections (stored privately in your browser).</p>
+          </div>
+          <button id="clearHistoryBtn" class="btn btn-ghost btn-sm">Clear Log</button>
+        </div>
+        <div id="historyList" class="history-list">
+          <p class="empty-state">No scans yet. Try a quick scan above or pick a sample scenario.</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- TAB 2: SPAM & SCAM MESSAGE DETECTOR -->
+    <section id="tab-spam" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h2>AI Spam &amp; Fraud Message Detector</h2>
+          <p class="muted">Analyze messages sent by unknown contacts, recruiters, buyers, or fake support agents for fraud, phishing, and social engineering.</p>
+        </div>
+        <div class="preset-bar">
+          <span class="muted">Samples:</span>
+          <button class="chip" data-spam-sample="kyc">Bank KYC Phish</button>
+          <button class="chip" data-spam-sample="crypto">Crypto Giveaway</button>
+          <button class="chip" data-spam-sample="job">Fake Remote Job</button>
+          <button class="chip" data-spam-sample="parcel">Parcel Fee SMS</button>
+          <button class="chip" data-spam-sample="safe">Legitimate Message</button>
+        </div>
+      </div>
+
+      <div class="split-layout">
+        <!-- Input Column -->
+        <div class="card">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="spamChannel">Message Channel</label>
+              <select id="spamChannel">
+                <option value="sms">SMS / Text Message</option>
+                <option value="whatsapp">WhatsApp / Telegram / DM</option>
+                <option value="email">Email</option>
+                <option value="social">Social Media / Marketplace</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="spamSender">Sender Handle / Email / Phone (Optional)</label>
+              <input id="spamSender" type="text" placeholder="e.g., support@paypa1-verify.xyz or +1-800..." />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="spamText">Message Content from Other Person</label>
+            <textarea id="spamText" rows="9" placeholder="Paste the exact message you received here..."></textarea>
+          </div>
+
+          <div class="action-row">
+            <button id="analyzeSpamBtn" class="btn btn-primary">Run AI Fraud Analysis</button>
+            <button id="clearSpamBtn" class="btn btn-ghost">Clear</button>
+            <button id="spamToAiBtn" class="btn btn-secondary btn-sm" title="Send to optional Live AI Copilot for second opinion">Deep AI Explain</button>
+          </div>
+        </div>
+
+        <!-- Result Column -->
+        <div class="card result-card" id="spamResultPanel">
+          <div class="empty-result" id="spamEmptyState">
+            <div class="shield-illustration">AI</div>
+            <h3>Ready to Inspect Incoming Message</h3>
+            <p class="muted">Paste any message or select a sample above to see risk scoring, highlighted manipulation triggers, link checks, and exact prevention steps.</p>
+          </div>
+
+          <div id="spamResults" class="hidden">
+            <div class="verdict-banner" id="spamVerdictBanner">
+              <div>
+                <span class="verdict-kicker" id="spamCategoryLabel">Threat Assessment</span>
+                <h3 id="spamVerdictTitle">Analyzing...</h3>
+              </div>
+              <div class="score-ring">
+                <strong id="spamScoreNum">0</strong>
+                <span>/ 100 Risk</span>
+              </div>
+            </div>
+
+            <div class="sub-metrics">
+              <div class="metric-pill">Confidence: <strong id="spamConfidence">0%</strong></div>
+              <div class="metric-pill">Scam Type: <strong id="spamScamType">None</strong></div>
+              <div class="metric-pill">Links Found: <strong id="spamLinkCount">0</strong></div>
+            </div>
+
+            <div class="block">
+              <h4>Highlighted Trigger Analysis</h4>
+              <div id="spamHighlightedText" class="highlighted-box"></div>
+            </div>
+
+            <div class="block">
+              <h4>AI Signal Breakdown</h4>
+              <div id="spamSignalBars" class="signal-bars"></div>
+            </div>
+
+            <div class="block">
+              <h4>Detected Indicators &amp; Red Flags</h4>
+              <ul id="spamFindingsList" class="findings-list"></ul>
+            </div>
+
+            <div class="block">
+              <h4>Recommended Prevention Actions</h4>
+              <ul id="spamAdviceList" class="advice-list"></ul>
+            </div>
+
+            <div id="spamLiveAiBox" class="block ai-copilot-box hidden"></div>
+
+            <div class="action-row">
+              <button id="reportSpamPublicBtn" class="btn btn-danger btn-sm">Report to Public Threat Feed (Auto-Redacts PII)</button>
+              <button id="exportSpamBtn" class="btn btn-ghost btn-sm">Download Evidence JSON</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: BUG, VULNERABILITY & LINK SCANNER -->
+    <section id="tab-bugs" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Bug, Vulnerability &amp; Malicious Link Scanner</h2>
+          <p class="muted">Detect software bugs, security vulnerabilities, hidden backdoors, leaked secrets, or deceptive links shared by strangers or untrusted sources.</p>
+        </div>
+        <div class="preset-bar">
+          <span class="muted">Samples:</span>
+          <button class="chip" data-bug-sample="sqli">SQLi &amp; Secret Leak</button>
+          <button class="chip" data-bug-sample="xss">XSS &amp; Eval Backdoor</button>
+          <button class="chip" data-bug-sample="malware">Obfuscated Payload</button>
+          <button class="chip" data-bug-sample="phishurl">Deceptive Phishing URL</button>
+          <button class="chip" data-bug-sample="clean">Clean Secure Code</button>
+        </div>
+      </div>
+
+      <div class="split-layout">
+        <!-- Input Column -->
+        <div class="card">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="bugMode">Scan Mode</label>
+              <select id="bugMode">
+                <option value="auto">Auto-Detect (Code / Script / URL)</option>
+                <option value="code">Code &amp; Script Vulnerability Scan</option>
+                <option value="url">URL / Link &amp; Payload Inspector</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bugLang">Language / Context</label>
+              <select id="bugLang">
+                <option value="auto">Auto-Detect Language</option>
+                <option value="javascript">JavaScript / TypeScript / HTML</option>
+                <option value="python">Python</option>
+                <option value="sql">SQL</option>
+                <option value="shell">Shell / PowerShell / Bash</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bugInput">Code Snippet, Script, Config, or URL</label>
+            <textarea id="bugInput" class="code-textarea" rows="11" spellcheck="false" placeholder="Paste code, script, HTML email source, or a suspicious URL (e.g., https://login-paypa1.xyz/verify?redirect=...)"></textarea>
+          </div>
+
+          <div class="action-row">
+            <button id="analyzeBugBtn" class="btn btn-primary">Scan for Bugs &amp; Threats</button>
+            <button id="clearBugBtn" class="btn btn-ghost">Clear</button>
+            <button id="bugToAiBtn" class="btn btn-secondary btn-sm">Deep AI Review</button>
+          </div>
+        </div>
+
+        <!-- Result Column -->
+        <div class="card result-card">
+          <div class="empty-result" id="bugEmptyState">
+            <div class="shield-illustration">&lt;/&gt;</div>
+            <h3>Static Security &amp; Bug Analyzer Ready</h3>
+            <p class="muted">Inspects code for CWE vulnerabilities, logic flaws, leaked credentials, obfuscated droppers, and dissects suspicious links.</p>
+          </div>
+
+          <div id="bugResults" class="hidden">
+            <div class="verdict-banner" id="bugVerdictBanner">
+              <div>
+                <span class="verdict-kicker" id="bugTargetType">Code Analysis</span>
+                <h3 id="bugVerdictTitle">Scan Complete</h3>
+              </div>
+              <div class="score-ring">
+                <strong id="bugGrade">A</strong>
+                <span id="bugCountSummary">0 Issues</span>
+              </div>
+            </div>
+
+            <div class="sub-metrics">
+              <div class="metric-pill">Critical/High: <strong id="bugHighCount">0</strong></div>
+              <div class="metric-pill">Medium/Low: <strong id="bugMedCount">0</strong></div>
+              <div class="metric-pill">Risk Score: <strong id="bugRiskScore">0/100</strong></div>
+            </div>
+
+            <div class="block" id="bugUrlBreakdownBox" style="display:none;">
+              <h4>URL Anatomy Inspection</h4>
+              <div id="bugUrlAnatomy" class="url-anatomy"></div>
+            </div>
+
+            <div class="block">
+              <h4>Detected Bugs, Vulnerabilities &amp; Fixes</h4>
+              <div id="bugFindingsContainer" class="bug-findings-list"></div>
+            </div>
+
+            <div id="bugLiveAiBox" class="block ai-copilot-box hidden"></div>
+
+            <div class="action-row">
+              <button id="reportBugPublicBtn" class="btn btn-danger btn-sm">Publish Advisory to Threat Feed</button>
+              <button id="exportBugBtn" class="btn btn-ghost btn-sm">Export Audit Report</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: PUBLIC THREAT FEED -->
+    <section id="tab-feed" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Public Cyber Threat &amp; Spam Feed</h2>
+          <p class="muted">Verified community reports of active scams, spam templates, phishing domains, and critical bugs. All personal data is stripped before display.</p>
+        </div>
+        <button id="openReportModalBtn" class="btn btn-primary">+ Submit Public Threat Report</button>
+      </div>
+
+      <div class="card feed-toolbar">
+        <input id="feedSearch" type="search" placeholder="Search keywords, domains, scam types, CWE IDs..." />
+        <select id="feedFilterCategory">
+          <option value="all">All Categories</option>
+          <option value="Phishing">Phishing &amp; KYC</option>
+          <option value="SMS Smishing">SMS Smishing</option>
+          <option value="Crypto / Job Scam">Crypto / Job Scam</option>
+          <option value="Code Bug / Malware">Code Bug / Malware</option>
+          <option value="Malicious Link">Malicious Link</option>
+        </select>
+        <select id="feedFilterSeverity">
+          <option value="all">All Severities</option>
+          <option value="Critical">Critical</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+        </select>
+      </div>
+
+      <div id="threatFeedGrid" class="feed-grid"></div>
+    </section>
+
+    <!-- TAB 5: PREVENTION & EDUCATION HUB -->
+    <section id="tab-prevent" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Cyber Fraud Prevention &amp; Citizen Defense Hub</h2>
+          <p class="muted">Learn to spot manipulation tactics, test your instincts with real-world scenarios, and follow step-by-step recovery checklists if targeted.</p>
+        </div>
+      </div>
+
+      <div class="prevent-grid">
+        <!-- Interactive Quiz -->
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h3>Spot-the-Scam Interactive Drill</h3>
+              <p class="muted">Can you tell legitimate alerts from cyber fraud and buggy traps?</p>
+            </div>
+            <span class="badge badge-cyan" id="quizScoreBadge">Score: 0 / 0</span>
+          </div>
+          <div id="quizContainer"></div>
+        </section>
+
+        <!-- Emergency Response Playbook -->
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h3>Emergency Incident Response Playbook</h3>
+              <p class="muted">Select what happened to get an immediate containment checklist.</p>
+            </div>
+          </div>
+          <div class="playbook-tabs" id="playbookTabs">
+            <button class="chip active" data-playbook="clicked">Clicked a Scam Link</button>
+            <button class="chip" data-playbook="otp">Shared OTP / Password</button>
+            <button class="chip" data-playbook="paid">Sent Money / Crypto</button>
+            <button class="chip" data-playbook="ran">Ran Untrusted Code</button>
+          </div>
+          <div id="playbookContent" class="playbook-box"></div>
+
+          <div class="reporting-dirs">
+            <h4>Official Public Reporting Portals</h4>
+            <ul>
+              <li><strong>USA:</strong> FBI IC3 (<code>ic3.gov</code>) &amp; FTC (<code>reportfraud.ftc.gov</code>)</li>
+              <li><strong>India:</strong> National Cyber Crime Portal (<code>cybercrime.gov.in</code>) / Helpline <strong>1930</strong></li>
+              <li><strong>UK:</strong> Action Fraud (<code>actionfraud.police.uk</code>) / Forward scam SMS to <strong>7726</strong></li>
+              <li><strong>EU / Global:</strong> Europol Cybercrime Reporting &amp; Anti-Phishing Working Group (<code>apwg.org</code>)</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal: Submit Public Report -->
+  <div id="reportModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div class="modal-backdrop" data-close-modal="reportModal"></div>
+    <div class="modal-card card">
+      <div class="modal-head">
+        <h3 id="reportModalTitle">Submit Public Threat Report</h3>
+        <button class="btn btn-ghost btn-sm" data-close-modal="reportModal">&times;</button>
+      </div>
+      <form id="publicReportForm">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="repCategory">Threat Category</label>
+            <select id="repCategory" required>
+              <option value="Phishing">Phishing &amp; KYC</option>
+              <option value="SMS Smishing">SMS Smishing</option>
+              <option value="Crypto / Job Scam">Crypto / Job Scam</option>
+              <option value="Malicious Link">Malicious Link</option>
+              <option value="Code Bug / Malware">Code Bug / Malware</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="repSeverity">Severity</label>
+            <select id="repSeverity" required>
+              <option value="Critical">Critical</option>
+              <option value="High" selected>High</option>
+              <option value="Medium">Medium</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="repTitle">Short Summary Title</label>
+          <input id="repTitle" type="text" required placeholder="e.g., Fake courier customs fee SMS targeting shoppers" />
+        </div>
+        <div class="form-group">
+          <label for="repIndicator">Suspicious Message Excerpt, Domain, or Bug Snippet</label>
+          <textarea id="repIndicator" rows="4" required placeholder="Paste sample (phone numbers, emails, and secrets will be auto-redacted)..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="repNotes">Prevention Advice / Context</label>
+          <input id="repNotes" type="text" placeholder="e.g., Sender used bit.ly link asking for card details" />
+        </div>
+        <div class="privacy-note">
+          <strong>Auto-Redaction Enabled:</strong> Emails, phone numbers, and card/key strings are masked before saving to the public feed.
+        </div>
+        <div class="action-row">
+          <button type="submit" class="btn btn-primary">Publish Redacted Report</button>
+          <button type="button" class="btn btn-ghost" data-close-modal="reportModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Optional Live AI Copilot Settings -->
+  <div id="aiModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle">
+    <div class="modal-backdrop" data-close-modal="aiModal"></div>
+    <div class="modal-card card">
+      <div class="modal-head">
+        <h3 id="aiModalTitle">AI Engine Configuration</h3>
+        <button class="btn btn-ghost btn-sm" data-close-modal="aiModal">&times;</button>
+      </div>
+      <p class="muted">
+        SentinelGrid's built-in <strong>Local Heuristic &amp; Bayesian AI Engine</strong> works offline with zero setup. Optionally, connect a local <strong>Ollama</strong> model or a <strong>Gemini API key</strong> (stored only in your browser session) for deeper natural-language threat explanations.
+      </p>
+      <form id="aiConfigForm">
+        <div class="form-group">
+          <label for="aiProvider">AI Copilot Provider</label>
+          <select id="aiProvider">
+            <option value="local">Built-in Local AI Engine Only (Recommended / Private)</option>
+            <option value="ollama">Local Ollama (http://localhost:11434)</option>
+            <option value="gemini">Google Gemini API (Bring Your Own Key)</option>
+          </select>
+        </div>
+        <div class="form-group" id="ollamaFields" style="display:none;">
+          <label for="ollamaModel">Ollama Model Name</label>
+          <input id="ollamaModel" type="text" value="llama3.2" placeholder="e.g., llama3.2, mistral, qwen2.5" />
+        </div>
+        <div class="form-group" id="geminiFields" style="display:none;">
+          <label for="geminiApiKey">Gemini API Key (Session Only)</label>
+          <input id="geminiApiKey" type="password" placeholder="AIza..." autocomplete="off" />
+        </div>
+        <div class="action-row">
+          <button type="submit" class="btn btn-primary">Save Engine Settings</button>
+          <button type="button" class="btn btn-ghost" data-close-modal="aiModal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span><strong>SentinelGrid</strong> — Public AI Cyber Fraud, Spam &amp; Bug Prevention Portal</span>
+      <span class="muted">Client-side detection &bull; Zero telemetry leakage &bull; Stay vigilant before clicking</span>
+    </div>
+  </footer>
+
+  <script defer src="js/spam-engine.js"></script>
+  <script defer src="js/bug-engine.js"></script>
+  <script defer src="js/community.js"></script>
+  <script defer src="js/app.js"></script>
+</body>
+</html>
